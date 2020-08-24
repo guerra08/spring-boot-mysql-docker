@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    private final UserService service;
+    @Autowired
+    private UserService service;
 
     @Autowired
-    public UserController(UserService us){
-        this.service = us;
-    }
+    public UserController(){}
     
     @GetMapping("/new-user")
     public String getNewUserPage() {

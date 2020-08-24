@@ -21,7 +21,7 @@ public class UserServiceTest {
     @Mock
     private UserRepository repo;
     
-    @InjectMocks // auto inject helloRepository
+    @InjectMocks
     private UserService service = new UserService();
 
     @Test
