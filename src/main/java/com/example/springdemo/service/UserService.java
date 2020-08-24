@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     
-    private final UserRepository uRepo;
-
     @Autowired
-    public UserService(UserRepository r){
-        this.uRepo = r;
+    private UserRepository uRepo;
+
+    public UserService(){
+
     }
 
     public List<User> findAll(){

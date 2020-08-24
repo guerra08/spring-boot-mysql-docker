@@ -2,22 +2,33 @@ package com.example.springdemo;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+import static java.util.Arrays.asList;
+
+import com.example.springdemo.model.User;
+import com.example.springdemo.repository.UserRepository;
 import com.example.springdemo.service.UserService;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class UserServiceTest {
+
+    @Mock
+    private UserRepository repo;
     
-    @Autowired
-    UserService service;
+    @InjectMocks // auto inject helloRepository
+    private UserService service = new UserService();
 
     @Test
     void testFindAll(){
-        assertTrue(service.findAll().isEmpty());
+        User test = new User("Bruno", "umaemailqualquer@outlook.com");
+        when(service.findAll()).thenReturn(asList(test));
+        assertEquals("Bruno", service.findAll().get(0).getName());
     }
 
 }
