@@ -5,7 +5,7 @@ For studies and example purposes.
 ## Requirements
  - Java 11 installed on your machine
  - Docker
- - And editor of your choice
+ - An editor of your choice
 
 
 ## Start MySQL database container on Docker
