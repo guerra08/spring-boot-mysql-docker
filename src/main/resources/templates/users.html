@@ -10,6 +10,7 @@
     <div th:each="user: ${users}">
         <p th:text="${user.getName()}"></p>
         <p th:text="${user.getEmail()}"></p>
+        <p th:text="${user.getSlug()}"></p>
         <hr/>
     </div>
 </body>

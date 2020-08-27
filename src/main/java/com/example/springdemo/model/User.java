@@ -2,11 +2,7 @@ package com.example.springdemo.model;
 
 import com.example.springdemo.utils.Formatting;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -14,7 +10,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
     private String name;
     private String email;
     private String slug;
@@ -22,7 +17,6 @@ public class User {
     public User(String name, String email) {
         this.name   = name;
         this.email  = email;
-        this.slug   = Formatting.toSlug(name);
     }
 
     public User(){
@@ -55,6 +49,16 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.slug = Formatting.toSlug(name);
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.slug = Formatting.toSlug(name);
     }
 
 }
