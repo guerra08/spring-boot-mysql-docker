@@ -1,5 +1,7 @@
 package com.example.springdemo.model;
 
+import com.example.springdemo.utils.Formatting;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
 public class User {
 
     @Id
@@ -16,15 +17,21 @@ public class User {
     
     private String name;
     private String email;
+    private String slug;
 
     public User(String name, String email) {
         this.name   = name;
         this.email  = email;
+        this.slug   = Formatting.toSlug(name);
     }
 
     public User(){
         
     }
+
+    public String getSlug() { return slug; }
+
+    public void setSlug(String slug) { this.slug = slug; }
 
     public long getId() {
         return this.id;

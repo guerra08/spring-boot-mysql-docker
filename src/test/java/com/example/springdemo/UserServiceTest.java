@@ -1,34 +1,30 @@
 package com.example.springdemo;
 
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-
-import static java.util.Arrays.asList;
-
 import com.example.springdemo.model.User;
-import com.example.springdemo.repository.UserRepository;
 import com.example.springdemo.service.UserService;
-
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class UserServiceTest {
 
-    @Mock
-    private UserRepository repo;
-    
-    @InjectMocks
-    private UserService service = new UserService();
+    @Autowired
+    private UserService service;
 
     @Test
-    void testFindAll(){
-        User test = new User("Bruno", "umaemailqualquer@outlook.com");
-        when(service.findAll()).thenReturn(asList(test));
-        assertEquals("Bruno", service.findAll().get(0).getName());
+    void testInsertNewUser(){
+        User u = new User("Bruno Juca", "gguerrabruno@outlook.com");
+        assertNotNull(service.save(u));
+    }
+
+    @Test
+    void testInsert_thenFindByStub(){
+        User u = new User("Carlos Silva", "carloss@gmail.com");
+        service.save(u);
+        assertNotNull(service.findUserBySlug("carlos-silva"));
     }
 
 }

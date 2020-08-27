@@ -10,18 +10,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    
+
+    private final UserRepository repo;
+
     @Autowired
-    private UserRepository uRepo;
-
-    public UserService(){}
-
-    public List<User> findAll(){
-        return (List<User>) uRepo.findAll();
+    public UserService(UserRepository r){
+        repo = r;
     }
 
-    public void save(User u){
-        uRepo.save(u);
+    public List<User> findAll(){
+        return (List<User>) repo.findAll();
+    }
+
+    public User findUserBySlug(String slug){
+        return repo.findBySlug(slug);
+    }
+
+    public User save(User u){
+        return repo.save(u);
     }
 
 }
