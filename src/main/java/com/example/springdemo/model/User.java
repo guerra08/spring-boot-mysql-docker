@@ -20,7 +20,7 @@ public class User {
     }
 
     public User(){
-        
+
     }
 
     public String getSlug() { return slug; }
@@ -51,14 +51,10 @@ public class User {
         this.email = email;
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.slug = Formatting.toSlug(name);
-    }
 
-    @PrePersist
-    protected void onCreate() {
-        this.slug = Formatting.toSlug(name);
+    @PostPersist
+    protected void generateSlug() {
+        this.slug = Formatting.toSlug(name) + "." + id;
     }
 
 }
